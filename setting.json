@@ -1,0 +1,16 @@
+{
+    "editor.tokenColorCustomizations": {
+      "[Monokai Pro]": {
+        "textMateRules": [
+          { 
+            "scope": "variable.other.object.js",
+            "settings": { "foreground": "#9effff" }
+          },
+          { 
+            "scope": "text.html.derivative",
+            "settings": { "foreground": "#9effff" }
+          }
+        ]
+      }
+    }
+  }

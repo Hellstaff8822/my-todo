@@ -1,0 +1,23 @@
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-family);
+  background: linear-gradient(180deg, #fff 39.81%, #acd1f8 99.54%);
+  background-attachment: fixed; /* Робить фон нерухомим */
+  background-repeat: no-repeat; /* Запобігає повторенню градієнта */
+  background-size: cover;
+}
+
+.container {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 20px;
+}
+
+.subtitle {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 14px;
+  color: #000;
+}

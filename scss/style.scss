@@ -1,0 +1,11 @@
+@import "vendors/reset";
+@import "utils/mixins";
+@import "utils/vars";
+@import "layout/base";
+
+
+
+//components
+
+@import "components/welcome";
+@import "components/HomePage";

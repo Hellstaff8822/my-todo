@@ -1,0 +1,57 @@
+.row {
+  overflow: hidden;
+  margin-top: 150rem;
+  margin-bottom: 160rem;
+}
+
+.customers-container {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  overflow: hidden;
+  max-width: 1300rem;
+  width: 100%;
+  margin-inline: auto;
+}
+.slick-slide {
+  margin: 0px 20px;
+}
+
+.customer-logos {
+  overflow: inherit;
+}
+
+.slick-track::before,
+.slick-track::after {
+  display: table;
+  content: "";
+}
+
+.slick-track::after {
+  clear: both;
+}
+
+.slick-track {
+  padding: 1rem 0;
+}
+
+.slick-loading .slick-track {
+  visibility: hidden;
+}
+
+.slick-slide.slick-loading img {
+  display: none;
+}
+
+.slick-slide.dragging img {
+  pointer-events: none;
+}
+
+.slick-loading .slick-slide {
+  visibility: hidden;
+}
+
+.slick-prev,
+.slick-next {
+  display: none !important;
+}
