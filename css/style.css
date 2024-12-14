@@ -270,10 +270,23 @@ body {
   margin-bottom: 53px;
 }
 .home-page__menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   border: 1px solid #d5d6f2;
   border-radius: 12px;
   width: 36px;
   height: 36px;
+}
+.home-page__menu img {
+  width: 20px;
+  height: 20px;
 }
 .home-page__avatar {
   border: 1px solid #d5d6f2;
@@ -297,7 +310,6 @@ body {
   height: 115px;
   margin-inline: auto;
   margin-bottom: 30px;
-  margin-left: 16px;
 }
 .home-page__text {
   font-weight: 700;
@@ -401,116 +413,111 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 80px;
   background-color: #fff;
-  -webkit-box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 112px 112px 0 0;
+}
+.bottom-navigation::before {
+  content: "";
 }
 
 .navigation-container {
-  position: relative;
-  width: 100%;
-  max-width: 600px;
-  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0 20px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding: 10px;
+  position: relative;
+}
+
+.add-button {
+  width: 60px;
+  height: 60px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 30px;
+  cursor: pointer;
+  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  -webkit-transition: -webkit-transform 0.2s ease-in-out;
+  transition: -webkit-transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+  position: absolute;
+  top: -25px;
+  z-index: 2;
 }
 
 .circle-button {
   position: absolute;
   top: -30px;
   left: 50%;
+  border-radius: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  width: 60px;
-  height: 60px;
-  background-color: #4d9ff9;
-  border-radius: 50%;
-  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  width: 70px;
+  height: 70px;
+  background-color: white;
 }
-
-.add-button {
-  border: none;
-  background-color: #4d9ff9;
-  color: #fff;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
+.circle-button::before {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  -webkit-box-shadow: 15px 18px #fff;
+          box-shadow: 15px 18px #fff;
   border-radius: 50%;
-  width: 100%;
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  top: 3px;
+  left: -27px;
+}
+.circle-button::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  -webkit-box-shadow: -15px 18px #fff;
+          box-shadow: -15px 18px #fff;
+  border-radius: 50%;
+  top: 3px;
+  right: -27px;
 }
 
 .nav-icons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  gap: 20px;
   width: 100%;
   padding: 0;
+  margin-top: 20px;
   list-style: none;
-  margin-top: 15px;
+}
+
+:is(.icons-left, .icons-right) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 27px;
 }
 
 .nav-icons li {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
   text-align: center;
 }
 
-.nav-icons img {
-  width: 24px;
-  height: 24px;
-  opacity: 0.6;
-  -webkit-transition: opacity 0.3s;
-  transition: opacity 0.3s;
-}
-
-.nav-icons img:hover {
-  opacity: 1;
+.nav-icons a img {
+  width: 30px;
+  height: 30px;
 }
 
 .custom-radio {

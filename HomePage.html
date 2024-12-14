@@ -10,7 +10,7 @@
     <div class="container">
       <div class="home-page">
         <div class="home-page__header">
-          <div class="home-page__menu"></div>
+          <div class="home-page__menu"><img src="/images/icon/icons-menu.svg" alt="menu-icon"></div>
           <div class="home-page__avatar"></div>
         </div>
         <div class="home-page__manage">
@@ -22,32 +22,32 @@
         <section class="home-category">
           <h3 class="home-category__title subtitle">Категоріїї</h3>
           <div class="home-category__card">
-            <div class="home-category__item">
+            <div id = 'homeButton' class="home-category__item">
               <img src="/images/icon/categories/work.svg" alt="" />
               <p class="home-category__describe">Робота</p>
             </div>
-            <div class="home-category__item">
+            <div id = 'userButton' class="home-category__item">
               <img src="/images/icon/categories/user.svg" alt="" />
               <p class="home-category__describe">Особисте</p>
             </div>
-            <div class="home-category__item">
+            <div id = 'shopButton' class="home-category__item">
               <img src="/images/icon/categories/shopping-cart.svg" alt="" />
               <p class="home-category__describe">Покупки</p>
             </div>
-            <div class="home-category__item">
+            <div id = 'healthButton' class="home-category__item">
               <img src="/images/icon/categories/hearth.svg" alt="" />
               <p class="home-category__describe">Здоров’я</p>
             </div>
           </div>
         </section>
   
-        <section class="home-tasks">
+        <section id = "tasks" class="home-tasks">
           <h3 class="home-tasks__title subtitle">Сьогодні у вас  завдань</h3>
           <div class="home-tasks__item">
             <div class="home-tasks__func">
               <div class="custom-radio">
-                <input type="radio" id="radio1" name="radio" />
-                <label for="radio1"></label>
+                <input type="radio" id="myInput" name="radio" />
+                <label  for="radio1"></label>
               </div>
               <p class="home-tasks__text">Щоденний виклик UI</p>
             </div>
@@ -60,14 +60,17 @@
 
       <div class="bottom-navigation">
         <div class="navigation-container">
-          <div class="circle-button">
-            <button class="add-button">+</button>
-          </div>
+            <button id = 'addButton' class="add-button">+</button>
+            <div class="circle-button"></div>
           <ul class="nav-icons">
-            <li><a href="#"><img src="/images/icon/navigate/home.svg" alt="Home" /></a></li>
-            <li><a href="#"><img src="/images/icon/navigate/calendar.svg" alt="Calendar" /></a></li>
-            <li><a href="#"><img src="/images/icon/navigate/file-text.svg" alt="Files" /></a></li>
-            <li><a href="#"><img src="/images/icon/navigate/settings.svg" alt="Settings" /></a></li>
+          <div class ="icons-left">
+              <li><a href="#"><img src="/images/icon/navigate/home.svg" alt="Home" /></a></li>
+              <li><a href="#"><img src="/images/icon/navigate/calendar.svg" alt="Calendar" /></a></li>
+          </div>
+            <div class="icons-right">
+              <li><a href="#"><img src="/images/icon/navigate/file-text.svg" alt="Files" /></a></li>
+              <li><a href="#"><img src="/images/icon/navigate/settings.svg" alt="Settings" /></a></li>
+            </div>
           </ul>
         </div>
       </div>
