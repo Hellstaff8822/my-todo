@@ -162,6 +162,11 @@ body {
   color: #000;
 }
 
+.completed {
+  text-decoration: line-through;
+  color: #888;
+}
+
 .welcome {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -388,6 +393,18 @@ body {
   background: #fff;
   padding: 20px 15px;
 }
+.home-tasks__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
 .home-tasks__func {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -403,9 +420,19 @@ body {
   color: #000;
 }
 .home-tasks__time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-weight: 400;
   font-size: 12px;
   color: #62a6d8;
+}
+.home-tasks__time span {
+  font-size: 20px;
+  color: gray;
 }
 
 .bottom-navigation {
@@ -527,11 +554,11 @@ body {
   height: 20px;
 }
 
-input[type=radio] {
+input[type=checkbox] {
   display: none;
 }
 
-label {
+.my-label {
   display: inline-block;
   width: 100%;
   height: 100%;
@@ -540,8 +567,7 @@ label {
   position: relative;
   cursor: pointer;
 }
-
-label::after {
+.my-label::after {
   content: "";
   display: block;
   width: 50%;
@@ -559,7 +585,100 @@ label::after {
   transition: transform 0.2s ease, -webkit-transform 0.2s ease;
 }
 
-input[type=radio]:checked + label::after {
+input[type=checkbox]:checked + .my-label::after {
   -webkit-transform: translate(-50%, -50%) scale(1);
           transform: translate(-50%, -50%) scale(1);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  text-align: center;
+  color: #333;
+}
+
+#taskForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+
+#taskForm label {
+  font-size: 14px;
+  color: #555;
+}
+
+#taskForm input,
+#taskForm select {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+}
+
+#taskForm button[type=submit] {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#closeModal {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.material-icons-outlined {
+  padding: 5px;
+  font-size: 30px;
+  border-radius: 50%;
+  background: white;
 }/*# sourceMappingURL=style.css.map */
