@@ -87,6 +87,12 @@
     }
   }
 
+  #shopButton {
+    img {
+      padding-left: 8px;
+    }
+  }
+
   &__describe {
     font-weight: 400;
     font-size: 12px;
@@ -132,7 +138,7 @@
     font-weight: 400;
     font-size: 12px;
     color: #62a6d8;
-    span{
+    span {
       font-size: 20px;
       color: gray;
     }

@@ -369,6 +369,9 @@ body {
   padding: 10px;
   margin-bottom: 13px;
 }
+.home-category #shopButton img {
+  padding-left: 8px;
+}
 .home-category__describe {
   font-weight: 400;
   font-size: 12px;

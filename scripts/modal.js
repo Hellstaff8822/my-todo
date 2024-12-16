@@ -11,10 +11,10 @@ export function createModal() {
           
           <label for="taskCategory">Категорія:</label>
           <select id="taskCategory">
-            <option value="Робота">Робота</option>
-            <option value="Особисте">Особисте</option>
-            <option value="Покупки">Покупки</option>
-            <option value="Здоров'я">Здоров'я</option>
+            <option>Робота</option>
+            <option >Особисте</option>
+            <option>Покупки</option>
+            <option>Здоров&#39;я</option>
           </select>
           
           <label for="taskTime">Час:</label>
