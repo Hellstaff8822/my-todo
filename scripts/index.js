@@ -6,17 +6,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const taskContainer = document.getElementById('taskContainer');
   
   if (!addButton) {
-    console.error('Button with id "addButton" not found!');
+    console.error('Кнопку з id "addButton" не знайдено!');
     return;
   }
 
-  // Завантаження тасків з localStorage
+  // Маппінг кольорів для категорій
+  const categoryColors = {
+    'Робота': '#92cbff',
+    'Особисте': '#fda859',
+    'Покупки': '#6bf380',
+    'Здоров\'я': '#fa8ab3'
+  };
+
+  // Завантаження завдань з localStorage
   const loadTasks = () => {
     const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
     savedTasks.forEach((task) => addTaskToDOM(task));
   };
 
-  // Збереження тасків в localStorage
+  // Збереження завдань в localStorage
   const saveTasks = () => {
     const tasks = [];
     document.querySelectorAll('.home-tasks__item').forEach((taskElement) => {
@@ -29,12 +37,37 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   };
 
-  // Додавання таска в DOM
+  // Додавання завдання в DOM
   const addTaskToDOM = ({ text, time, completed, category }) => {
     const task = document.createElement('div');
     task.className = 'home-tasks__item';
     const uniqueId = 'checkbox_' + Date.now() + Math.random().toString(36).substring(2); 
-    task.innerHTML = `
+    
+    // Отримуємо колір для категорії
+    const categoryColor = categoryColors[category] || '#79a7d8';
+    
+    // Встановлюємо CSS змінну для конкретного елемента
+    task.style.setProperty('--category-border-color', categoryColor);
+
+    // Створення динамічного стилю для мітки
+    const dynamicStyle = document.createElement('style');
+    dynamicStyle.textContent = `
+      #${uniqueId} + .my-label {
+        border-color: ${categoryColor};
+      }
+      #${uniqueId} + .my-label::after {
+        background-color: ${categoryColor};
+      }
+      #${uniqueId}:checked + .my-label::after {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    `;
+    task.appendChild(dynamicStyle);
+
+    // Додаємо можливість фокусу
+    task.setAttribute('tabindex', '0');
+
+    task.innerHTML += `
       <div class="home-tasks__func">
         <div class="custom-radio">
           <input type="checkbox" id="${uniqueId}" ${completed ? 'checked' : ''} />
@@ -42,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <p class="home-tasks__text ${completed ? 'completed' : ''}">${text}</p>
       </div>
-      <span class="home-tasks__category">${category}</span>
+      <span class="home-tasks__category" data-category="${category}" style="background-color: ${categoryColor}; color: white; padding: 2px 6px; border-radius: 4px;">${category}</span>
       <span class="home-tasks__time ${completed ? 'completed' : ''}">
         <span class="material-icons-outlined delete-task">delete</span>${time}
       </span>
@@ -71,6 +104,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  // Додаємо обробник для кнопок категорій
+  const categoryButtons = document.querySelectorAll('.home-category__item');
+  categoryButtons.forEach(button => {
+    const categoryName = button.querySelector('.home-category__describe').textContent.trim();
+    const categoryColor = categoryColors[categoryName] || '#79a7d8';
+
+    button.style.setProperty('--category-border-color', categoryColor);
+
+    button.addEventListener('click', () => {
+      const selectedCategory = categoryName;
+      filterTasksByCategory(selectedCategory);
+    });
+  });
+
   setupModalEvents('addButton', (taskData) => {
     addTaskToDOM({
       text: `${taskData.text}`,
@@ -82,15 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   loadTasks();
-
-
-  const categoryButtons = document.querySelectorAll('.home-category__item');
-  categoryButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const selectedCategory = button.querySelector('.home-category__describe').textContent.trim();
-      filterTasksByCategory(selectedCategory);
-    });
-  });
 
   const filterTasksByCategory = (category) => {
     const tasks = document.querySelectorAll('.home-tasks__item');
@@ -107,8 +145,13 @@ document.addEventListener('DOMContentLoaded', () => {
   filterTasksByCategory('all');
 
   document.addEventListener('click', (e) => {
-    if (!e.target.closest('.home-category__item')) {
-      filterTasksByCategory('all');
+    if (
+      e.target.closest('.home-category__item') || 
+      e.target.closest('.home-tasks__item') ||   
+      e.target.closest('input[type="checkbox"]') 
+    ) {
+      return; 
     }
+    filterTasksByCategory('all');
   });
 });

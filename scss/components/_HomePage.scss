@@ -111,6 +111,11 @@
     border-radius: 12px;
     background: #fff;
     padding: 20px 15px;
+    &:active,
+    &:focus {
+      border: 2px solid var(--category-border-color);
+      // Можна додати легкий box-shadow для кращого ефекту
+      box-shadow: 0 0 0 1px var(--category-border-color);    }
   }
   &__list {
     display: flex;
@@ -138,6 +143,7 @@
     font-weight: 400;
     font-size: 12px;
     color: #62a6d8;
+    text-decoration: none;
     span {
       font-size: 20px;
       color: gray;
