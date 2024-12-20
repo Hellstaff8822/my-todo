@@ -13,10 +13,26 @@ https://cdn.jsdelivr.net/npm/material-icons@1.13.12/iconfont/material-icons.min.
   <body>
     <div class="container">
       <div class="home-page">
-        <div class="home-page__header">
-          <div class="home-page__menu"><img src="/images/icon/icons-menu.svg" alt="menu-icon"></div>
+        <header class="home-page__header">
+          <div class="home-page__menu">
+            <img src="/images/icon/icons-menu.svg" alt="menu-icon">
+          </div>
+          
+          <div id="overlay" class="overlay"></div>
+          
+          <nav id="navList" class="home-page__nav">
+            <span id = 'closeButton' class="material-icons-outlined close-nav">
+              arrow_back
+              </span>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Calendar</a></li>
+              <li><a href="#">Files</a></li>
+              <li><a href="#">Settings</a></li>
+            </ul>
+          </nav>
           <div class="home-page__avatar"></div>
-        </div>
+        </header>
         <div class="home-page__manage">
           <p class="home-page__text">Плануй свій час ефективно</p>
           <img src="/images/icon/arrow.svg" alt="arrow" />

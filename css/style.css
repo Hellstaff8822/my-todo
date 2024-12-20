@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html,
 *,
 *:before,
@@ -723,4 +724,91 @@ input[type=checkbox]:checked + .my-label::after {
   padding: 8px 10px;
   border-radius: 8px;
   width: 100px;
+}
+
+/* Загальні стилі для меню */
+.home-page__nav {
+  position: fixed;
+  top: 0;
+  left: -100%; /* Ховаємо меню за межами екрана */
+  height: 100%;
+  width: 300px; /* Ширина меню */
+  background-color: #ffffff;
+  -webkit-box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  -webkit-transition: left 0.3s ease;
+  transition: left 0.3s ease; /* Анімація плавного виїзду */
+  z-index: 10;
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+}
+
+/* Активний стан меню */
+.home-page__nav.active {
+  left: 0;
+}
+
+/* Закриття прокрутки під час відкритого меню */
+.no-scroll {
+  overflow: hidden;
+}
+
+.home-page__nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 15px;
+}
+
+.home-page__nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 5px 10px;
+  -webkit-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}
+
+.home-page__nav ul li a:hover {
+  color: #007bff;
+}
+
+/* Стилі для затемнення фону */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9;
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+.close-nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 32px;
 }/*# sourceMappingURL=style.css.map */

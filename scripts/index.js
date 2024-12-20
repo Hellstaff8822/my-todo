@@ -166,3 +166,24 @@ document.addEventListener('DOMContentLoaded', () => {
     filterTasksByCategory('all');
   });
 });
+document.addEventListener('DOMContentLoaded', () => {
+  // Елементи
+  const navList = document.getElementById('navList');
+  const menuButton = document.querySelector('.home-page__menu');
+  const closeButton = document.getElementById('closeButton');
+  const overlay = document.getElementById('overlay');
+  const body = document.body;
+
+  // Відкриття меню
+  menuButton?.addEventListener('click', toggleMenu);
+
+  // Закриття меню
+  closeButton?.addEventListener('click', toggleMenu);
+  overlay?.addEventListener('click', toggleMenu);
+
+  function toggleMenu() {
+    const isActive = navList.classList.toggle('active');
+    overlay.classList.toggle('active');
+    body.classList.toggle('no-scroll', isActive);
+  }
+});
