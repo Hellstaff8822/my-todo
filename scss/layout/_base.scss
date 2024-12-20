@@ -4,8 +4,8 @@ html {
 body {
   font-family: var(--font-family);
   background: linear-gradient(180deg, #fff 39.81%, #acd1f8 99.54%);
-  background-attachment: fixed; /* Робить фон нерухомим */
-  background-repeat: no-repeat; /* Запобігає повторенню градієнта */
+  background-attachment: fixed; 
+  background-repeat: no-repeat; 
   background-size: cover;
 }
 
@@ -26,3 +26,4 @@ body {
   text-decoration: line-through;
   color: #888;
 }
+

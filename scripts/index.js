@@ -1,7 +1,9 @@
 import { createModal, setupModalEvents } from './modal.js';
+import { createEditModal, setupEditModalEvents } from './editModal.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   createModal();
+  createEditModal(); // Add this line
   const addButton = document.getElementById('addButton');
   const taskContainer = document.getElementById('taskContainer');
   
@@ -10,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // Маппінг кольорів для категорій
   const categoryColors = {
     'Робота': '#92cbff',
     'Особисте': '#fda859',
@@ -18,13 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
     'Здоров\'я': '#fa8ab3'
   };
 
-  // Завантаження завдань з localStorage
   const loadTasks = () => {
     const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
     savedTasks.forEach((task) => addTaskToDOM(task));
   };
 
-  // Збереження завдань в localStorage
   const saveTasks = () => {
     const tasks = [];
     document.querySelectorAll('.home-tasks__item').forEach((taskElement) => {
@@ -37,19 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   };
 
-  // Додавання завдання в DOM
   const addTaskToDOM = ({ text, time, completed, category }) => {
     const task = document.createElement('div');
     task.className = 'home-tasks__item';
     const uniqueId = 'checkbox_' + Date.now() + Math.random().toString(36).substring(2); 
     
-    // Отримуємо колір для категорії
     const categoryColor = categoryColors[category] || '#79a7d8';
     
-    // Встановлюємо CSS змінну для конкретного елемента
     task.style.setProperty('--category-border-color', categoryColor);
 
-    // Створення динамічного стилю для мітки
     const dynamicStyle = document.createElement('style');
     dynamicStyle.textContent = `
       #${uniqueId} + .my-label {
@@ -64,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     task.appendChild(dynamicStyle);
 
-    // Додаємо можливість фокусу
     task.setAttribute('tabindex', '0');
 
     task.innerHTML += `
@@ -82,7 +76,25 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     taskContainer.appendChild(task);
 
-    // Додати обробник для чекбокса
+    // Set up edit modal events for this task
+    setupEditModalEvents(task, (updatedTask) => {
+      const taskText = task.querySelector('.home-tasks__text');
+      const taskTime = task.querySelector('.home-tasks__time');
+      const taskCategory = task.querySelector('.home-tasks__category');
+      
+      taskText.textContent = updatedTask.text;
+      // Update time - remove the delete icon first
+      const deleteIcon = taskTime.querySelector('.delete-task');
+      taskTime.textContent = updatedTask.time;
+      taskTime.insertBefore(deleteIcon, taskTime.firstChild);
+      
+      // Update category
+      taskCategory.textContent = updatedTask.category;
+      taskCategory.style.backgroundColor = categoryColors[updatedTask.category] || '#79a7d8';
+      
+      saveTasks();
+    });
+
     const checkbox = task.querySelector('input[type="checkbox"]');
     const taskText = task.querySelector('.home-tasks__text');
     const taskTime = task.querySelector('.home-tasks__time');
@@ -104,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // Додаємо обробник для кнопок категорій
   const categoryButtons = document.querySelectorAll('.home-category__item');
   categoryButtons.forEach(button => {
     const categoryName = button.querySelector('.home-category__describe').textContent.trim();
