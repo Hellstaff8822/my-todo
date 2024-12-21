@@ -32,58 +32,111 @@ export function createEditModal() {
 export function setupEditModalEvents(taskElement, onSave) {
   let pressTimer;
   const modal = document.getElementById('editTaskModal');
-  const closeModal = document.querySelector('.close-btn');  // Змінений селектор
+  const closeModal = document.querySelector('.close-btn');
   const editForm = document.getElementById('editTaskForm');
   const taskTextInput = document.getElementById('editTaskText');
   const taskTimeInput = document.getElementById('editTaskTime');
   const taskCategoryInput = document.getElementById('editTaskCategory');
 
-  const taskTextElement = taskElement.querySelector('.home-tasks__text');
+ 
+  const categoryColors = {
+    'Робота': '#92cbff',
+    'Особисте': '#fda859',
+    'Покупки': '#6bf380',
+    'Здоров\'я': '#fa8ab3'
+  };
 
-  const startPress = () => {
-      pressTimer = setTimeout(() => {
-          const taskText = taskElement.querySelector('.home-tasks__text').textContent;
-          const taskTime = taskElement.querySelector('.home-tasks__time').textContent.replace(/delete/, '').trim();
-          const taskCategory = taskElement.querySelector('.home-tasks__category').textContent;
+  let currentTaskElement = null;
 
-          taskTextInput.value = taskText;
-          taskTimeInput.value = taskTime;
-          taskCategoryInput.value = taskCategory;
+  const startPress = (element) => {
+    pressTimer = setTimeout(() => {
+      currentTaskElement = element;
+      const taskText = currentTaskElement.querySelector('.home-tasks__text').textContent;
+      const taskTimeElement = currentTaskElement.querySelector('.home-tasks__time');
+      const timeText = taskTimeElement.textContent.replace(/delete/, '').trim();
+      const taskCategory = currentTaskElement.querySelector('.home-tasks__category').textContent;
 
-          modal.classList.remove('hidden');
-      }, 500);
+      taskTextInput.value = taskText;
+      taskTimeInput.value = timeText;
+      taskCategoryInput.value = taskCategory;
+
+      modal.classList.remove('hidden');
+    }, 500);
   };
 
   const cancelPress = () => {
-      clearTimeout(pressTimer);
+    clearTimeout(pressTimer);
   };
 
-  taskTextElement.addEventListener('mousedown', startPress);
+  const updateTaskColors = (taskElement, category) => {
+    const categoryColor = categoryColors[category] || '#79a7d8';
+    
+   
+    taskElement.style.setProperty('--category-border-color', categoryColor);
+    
+ 
+    const categorySpan = taskElement.querySelector('.home-tasks__category');
+    categorySpan.style.backgroundColor = categoryColor;
+    
+ 
+    const checkbox = taskElement.querySelector('input[type="checkbox"]');
+    const uniqueId = checkbox.id;
+    
+
+    let styleElement = taskElement.querySelector('style');
+    if (!styleElement) {
+      styleElement = document.createElement('style');
+      taskElement.appendChild(styleElement);
+    }
+    
+
+    styleElement.textContent = `
+      #${uniqueId} + .my-label {
+        border-color: ${categoryColor};
+      }
+      #${uniqueId} + .my-label::after {
+        background-color: ${categoryColor};
+      }
+      #${uniqueId}:checked + .my-label::after {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    `;
+  };
+
+  const taskTextElement = taskElement.querySelector('.home-tasks__text');
+
+  taskTextElement.addEventListener('mousedown', () => startPress(taskElement));
   taskTextElement.addEventListener('mouseup', cancelPress);
   taskTextElement.addEventListener('mouseleave', cancelPress);
 
   taskTextElement.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      startPress();
+    e.preventDefault();
+    startPress(taskElement);
   });
   taskTextElement.addEventListener('touchend', cancelPress);
   taskTextElement.addEventListener('touchcancel', cancelPress);
 
   closeModal.addEventListener('click', () => {
-      modal.classList.add('hidden');
+    modal.classList.add('hidden');
   });
 
   editForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+    e.preventDefault();
+    
+    if (!currentTaskElement) return;
 
-      const updatedTask = {
-          text: taskTextInput.value,
-          time: taskTimeInput.value,
-          category: taskCategoryInput.value,
-          completed: taskElement.querySelector('input[type="checkbox"]').checked
-      };
+    const updatedTask = {
+      text: taskTextInput.value,
+      time: taskTimeInput.value,
+      category: taskCategoryInput.value,
+      completed: currentTaskElement.querySelector('input[type="checkbox"]').checked
+    };
 
-      onSave(updatedTask, taskElement);
-      modal.classList.add('hidden');
+    
+    updateTaskColors(currentTaskElement, updatedTask.category);
+    
+    onSave(updatedTask, currentTaskElement);
+    modal.classList.add('hidden');
+    currentTaskElement = null;
   });
 }

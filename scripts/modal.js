@@ -29,7 +29,7 @@ export function createModal() {
   document.body.appendChild(modal);
 }
 
-// Налаштування подій для модального вікна
+
 export function setupModalEvents(openButtonId, onTaskSubmit) {
   const modal = document.getElementById('taskModal');
   const closeModal = document.getElementById('closeModal');

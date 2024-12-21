@@ -3,7 +3,7 @@ import { createEditModal, setupEditModalEvents } from './editModal.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   createModal();
-  createEditModal(); // Add this line
+  createEditModal(); 
   const addButton = document.getElementById('addButton');
   const taskContainer = document.getElementById('taskContainer');
   
@@ -76,19 +76,19 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     taskContainer.appendChild(task);
 
-    // Set up edit modal events for this task
+   
     setupEditModalEvents(task, (updatedTask) => {
       const taskText = task.querySelector('.home-tasks__text');
       const taskTime = task.querySelector('.home-tasks__time');
       const taskCategory = task.querySelector('.home-tasks__category');
       
       taskText.textContent = updatedTask.text;
-      // Update time - remove the delete icon first
+     
       const deleteIcon = taskTime.querySelector('.delete-task');
       taskTime.textContent = updatedTask.time;
       taskTime.insertBefore(deleteIcon, taskTime.firstChild);
       
-      // Update category
+  
       taskCategory.textContent = updatedTask.category;
       taskCategory.style.backgroundColor = categoryColors[updatedTask.category] || '#79a7d8';
       
@@ -167,17 +167,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 document.addEventListener('DOMContentLoaded', () => {
-  // Елементи
+
   const navList = document.getElementById('navList');
   const menuButton = document.querySelector('.home-page__menu');
   const closeButton = document.getElementById('closeButton');
   const overlay = document.getElementById('overlay');
   const body = document.body;
 
-  // Відкриття меню
+  
   menuButton?.addEventListener('click', toggleMenu);
 
-  // Закриття меню
+
   closeButton?.addEventListener('click', toggleMenu);
   overlay?.addEventListener('click', toggleMenu);
 
